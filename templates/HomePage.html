@@ -3,7 +3,7 @@
 <head>
 <title>Home Page</title>
 <!----------------------external link--------------------->
-    <link rel="stylesheet" type="text/css" href="IvFN.css"/>
+   <!-- <link rel="stylesheet" type="text/css" href="IvFN.css"/>-->
 	<style>
 		.container {
 			position: relative;
@@ -16,7 +16,81 @@
 			left: 200px;
 			font-size: 40px;
 			font-family: Century Gothic; 
+
 		}
+
+        body {
+            background-image: url('/static/IMG/background.png');
+            background-size: cover;
+        }
+
+        #IvFN {
+            background-color: #031C32;
+            width: 1200px;
+            border-radius: 10px;
+            margin: 50px 120px;
+        }
+
+        #IvFNHead {
+            margin: 0px auto 25px;
+            padding: 0px;
+        }
+
+        #IvFNH1 {
+            color: #EDDCDC;
+            margin: auto;
+            padding: 10px 30px 0px 700px;
+            font-size: 20px;
+            font-family: Century Gothic;
+        }
+
+        #IvFNP {
+            background-color: #ffffff;
+            margin: auto;
+            padding: 20px 30px;
+            border-radius: 10px;
+            width: 1000px;
+            font-size: 14px;
+            font-family: Century Gothic;
+            text-align: justify;
+        }
+
+        .logo {
+            width: 200px;
+            height: 100px;
+            position: absolute;
+            top: 70px;
+            left: 200px;
+        }
+
+        .menu {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #000;
+            width: 900px;
+        }
+
+            .menu li {
+                float: left;
+                text-transform: uppercase;
+                font-family: Century Gothic;
+                width: 150px;
+            }
+
+                .menu li a {
+                    display: block;
+                    color: #FFF;
+                    text-align: center;
+                    padding: 12px;
+                    text-decoration: none;
+                }
+
+                    .menu li a:hover {
+                        background-color: #333333;
+                    }
+
 	</style>
 </head>
 <!----------------------header--------------------->
@@ -24,15 +98,15 @@
 <center>
 <div id="IvFN">
     <div id="IvFNH1" class="IvFNH1">
-		<a href="HomePage.html"><img src="IMG/logo.png" class="logo" alt="logo"></a>
+		<a href="HomePage.html"><img src="{{url_for('static', filename='/IMG/logo.png')}}" class="logo" alt="logo"></a>
         <h1 class="IvFNH1">Home Page</h1>
 		<br/>
 	</div>
 	<div id="IvFNHead" class="IvFNHead">
 		<ul class="menu">
 			<li><a href="/" class="current">Home</a></li>
-			<li><a href="AddStaff.html">Add Staff</a></li>
-			<li><a href="SearchStaff.html">Search Staff</a></li>
+			<li><a href="/staffpage">Add Staff</a></li>
+			<li><a href="/searchstaffpage">Search Staff</a></li>
 			<li><a href="Payroll.html">Payroll</a></li>
 			<li><a href="Attendance.html">Attendance</a></li>
 			<li><a href="Benefits.html">Benefits</a></li>
@@ -41,7 +115,7 @@
 <!-------------------------content------------------------>
     <div id="IvFNP">
 		<div class="container">
-		<img src="IMG/homepage.png" class="home" alt="home" style="width:100%;">
+		<img src="{{url_for('static', filename='/IMG/homepage.png')}}" class="home" alt="home" style="width:100%;">
 		<div class="centered">Hello, Welcome to IvFN HRMS !</div>
 	</div>
     </div>

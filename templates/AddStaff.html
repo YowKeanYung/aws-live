@@ -3,11 +3,19 @@
 <head>
 <title>Add Staff</title>
 <!----------------------external link--------------------->
-    <link rel="stylesheet" type="text/css" href="IvFN.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/IvFN.css"/>
 	<style>
 		form {
 			text-align: center;
 		}
+
+        body {
+            background-image: url('/static/IMG/background.png');
+            background-size: cover;
+        }
+
+       
+
 	</style>
 </head>
 <!----------------------header--------------------->
@@ -15,15 +23,15 @@
 <center>
 <div id="IvFN">
     <div id="IvFNH1" class="IvFNH1">
-		<a href="HomePage.html"><img src="IMG/logo.png" class="logo" alt="logo"></a>
+		<a href="/"><img src="{{url_for('static', filename='/IMG/logo.png')}}" class="logo" alt="logo"></a>
         <h1 class="IvFNH1">Add Staff</h1>
 		<br/>
 	</div>
 	<div id="IvFNHead" class="IvFNHead">
 		<ul class="menu">
-			<li><a href="HomePage.html" class="current">Home</a></li>
-			<li><a href="AddStaff.html">Add Staff</a></li>
-			<li><a href="SearchStaff.html">Search Staff</a></li>
+			<li><a href="/" class="current">Home</a></li>
+			<li><a href="/staffpage">Add Staff</a></li>
+			<li><a href="/searchstaffpage">Search Staff</a></li>
 			<li><a href="Payroll.html">Payroll</a></li>
 			<li><a href="Attendance.html">Attendance</a></li>
 			<li><a href="Benefits.html">Benefits</a></li>

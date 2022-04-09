@@ -85,7 +85,19 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
+
     return render_template('AddStaffOutput.html', name=emp_name)
+
+
+
+@app.route("/staffpage", methods=['GET', 'POST'])
+def staffpage():
+    return render_template('AddStaff.html')
+
+@app.route("/searchstaffpage", methods=['GET', 'POST'])
+def searchstaffpage():
+    return render_template('SearchStaff.html')
+
 
 
 if __name__ == '__main__':
