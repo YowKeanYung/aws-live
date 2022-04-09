@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+<meta content="text/html; charset=ISO-8859-1"
+http-equiv="content-type">
+<title>Python Webbrowser</title>
+</head>
+<body>
+<table> 
+    <thead> 
+    <tr> 
+        <th>ID</th> 
+        <th>Name</th> 
+      
+    </tr> 
+    </thead> 
+    <tbody> 
+        {% for row in value %}  
+            <tr> 
+                <td>{{row[0]}}</td> 
+                <td>{{row[1]}}</td> 
+            </tr> 
+        {% endfor %} 
+    </tbody> 
+</table> 

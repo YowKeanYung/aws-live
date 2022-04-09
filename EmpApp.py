@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from flask.wrappers import Response
 from pymysql import connections
 import os
 import boto3
@@ -48,7 +49,7 @@ def AddEmp():
    # location = request.form['location']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
@@ -105,7 +106,7 @@ def searchstaffdetails():
    
      selectsql = "SELECT * FROM employee WHERE emp_id = %s"
      cursor = db_conn.cursor()
-     adr = emp_id
+     adr = (emp_id)
 
      try:
       cursor.execute(selectsql, adr) 
@@ -121,13 +122,50 @@ def searchstaffdetails():
       department = myresult[5] 
       joindate = myresult[6]
       salary = myresult[7]
-        
+
+      emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+      s3_client = boto3.client('s3')
+      response = s3_client.get_object(Bucket=custombucket, Key=emp_image_file_name_in_s3)
+      data = response['Body'].read()
+
      finally:
       cursor.close()
 
-     return render_template('ViewStaff.html', name=emp_id)
+     return render_template('ViewStaff.html', id=emp_id, name=emp_name,
+                           phone=phone, email=email, position=position, department=department, joinDate=joindate, salary=salary, image_url=data)
     
 
+
+@app.route("/getemp", methods=['POST'])
+def getemp():
+     emp_id = request.form['emp_id']
+   
+     selectsql = "SELECT * FROM employee"
+     cursor = db_conn.cursor()
+     #adr = (emp_id)
+
+     
+     cursor.execute(selectsql) 
+
+        
+     result = cursor.fetchall()
+
+     #p = []
+
+     #tbl = "<tr><td>ID</td><td>Name</td><td>Email</td><td>Phone</td></tr>"
+     #p.append(tbl)
+
+     #for row in result:
+     # a = "<tr><td>%s</td>"%row[0]
+     # p.append(a)
+     # b = "<td>%s</td>"%row[1]
+     # p.append(b)
+     # c = "<td>%s</td>"%row[2]
+     # p.append(c)
+     # d = "<td>%s</td></tr>"%row[3]
+     # p.append(d)
+
+     return render_template('Allemp.html', value=result)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)

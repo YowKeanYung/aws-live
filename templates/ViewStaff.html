@@ -1,9 +1,9 @@
 <!doctype html>
 <html>
 <head>
-<title>View Staff</title>
-<!----------------------external link--------------------->
-    <link rel="stylesheet" type="text/css" href="IvFN.css"/>
+	<title>View Staff</title>
+	<!----------------------external link--------------------->
+	<link rel="stylesheet" type="text/css" href="/static/IvFN.css" />
 	<style>
 		form {
 			text-align: center;
@@ -14,16 +14,16 @@
 <body>
 <center>
 <div id="IvFN">
-    <div id="IvFNH1" class="IvFNH1">
-		<a href="HomePage.html"><img src="IMG/logo.png" class="logo" alt="logo"></a>
-        <h1 class="IvFNH1">View Staff Details</h1>
-		<br/>
+	<div id="IvFNH1" class="IvFNH1">
+		<a href="/"><img src="{{url_for('static', filename='/IMG/logo.png')}}" class="logo" alt="logo"></a>
+		<h1 class="IvFNH1">View Staff Details</h1>
+		<br />
 	</div>
 	<div id="IvFNHead" class="IvFNHead">
 		<ul class="menu">
-			<li><a href="HomePage.html" class="current">Home</a></li>
-			<li><a href="AddStaff.html">Add Staff</a></li>
-			<li><a href="SearchStaff.html">Search Staff</a></li>
+			<li><a href="/" class="current">Home</a></li>
+			<li><a href="/staffpage">Add Staff</a></li>
+			<li><a href="/searchstaffpage">Search Staff</a></li>
 			<li><a href="Payroll.html">Payroll</a></li>
 			<li><a href="Attendance.html">Attendance</a></li>
 			<li><a href="Benefits.html">Benefits</a></li>
