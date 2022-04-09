@@ -44,7 +44,8 @@ def AddEmp():
     department = request.form['emp_dept'] 
     joindate = request.form['emp_date']
     salary = request.form['emp_salary']
-    location = request.form['location']
+
+   # location = request.form['location']
     emp_image_file = request.files['emp_image_file']
 
     insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
@@ -98,6 +99,34 @@ def staffpage():
 def searchstaffpage():
     return render_template('SearchStaff.html')
 
+@app.route("/searchstaffdetails", methods=['POST'])
+def searchstaffdetails():
+     emp_id = request.form['emp_id']
+   
+     selectsql = "SELECT * FROM employee WHERE emp_id = %s"
+     cursor = db_conn.cursor()
+     adr = emp_id
+
+     try:
+      cursor.execute(selectsql, adr) 
+
+        # if SELECT:
+      myresult = cursor.fetchone()
+
+      emp_id = myresult[0]
+      emp_name = myresult[1]
+      phone = myresult[2]
+      email = myresult[3]
+      position = myresult[4]
+      department = myresult[5] 
+      joindate = myresult[6]
+      salary = myresult[7]
+        
+     finally:
+      cursor.close()
+
+     return render_template('ViewStaff.html', name=emp_id)
+    
 
 
 if __name__ == '__main__':
