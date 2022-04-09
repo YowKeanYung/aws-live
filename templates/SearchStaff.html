@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<title>Search Staff</title>
+<!----------------------external link--------------------->
+    <link rel="stylesheet" type="text/css" href="IvFN.css"/>
+	<style>
+		form {
+			text-align: center;
+		}
+	</style>
+</head>
+<!----------------------header--------------------->
+<body>
+<center>
+<div id="IvFN">
+    <div id="IvFNH1" class="IvFNH1">
+		<a href="HomePage.html"><img src="IMG/logo.png" class="logo" alt="logo"></a>
+        <h1 class="IvFNH1">Search Staff</h1>
+		<br/>
+	</div>
+	<div id="IvFNHead" class="IvFNHead">
+		<ul class="menu">
+			<li><a href="HomePage.html" class="current">Home</a></li>
+			<li><a href="AddStaff.html">Add Staff</a></li>
+			<li><a href="SearchStaff.html">Search Staff</a></li>
+			<li><a href="Payroll.html">Payroll</a></li>
+			<li><a href="Attendance.html">Attendance</a></li>
+			<li><a href="Benefits.html">Benefits</a></li>
+		</ul>
+	</div>
+<!-------------------------content------------------------>
+    <div id="IvFNP">
+		<form action="/fetchdata" autocomplete="on" method="POST">
+
+			<h3>Please Enter Employee ID</h3>
+
+		  	Employee ID:<br> <input style="height:25px;font-size:14pt;" type="number" name="emp_id" autofocus size="40"><br><br>
+
+
+			<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">FETCH INFO</button><br><br>
+
+	  		<button type="submit" formaction="http://3.134.115.108:80/" style="background: white	; height: 45px; width: 200px; color: black; size: 5; font:oblique;" method="GET">GO TO UPDATE DATABASE PAGE</button>
+
+		</form>
+    </div>
+	<br/>
+</div>
+</center>
+</body>
+</html>

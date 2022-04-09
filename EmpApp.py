@@ -23,7 +23,7 @@ table = 'employee'
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('AddEmp.html')
+    return render_template('HomePage.html')
 
 
 @app.route("/about", methods=['POST'])
@@ -31,26 +31,33 @@ def about():
     return render_template('www.intellipaat.com')
 
 
-@app.route("/addemp", methods=['POST'])
+@app.route("/addstaff", methods=['POST'])
 def AddEmp():
     emp_id = request.form['emp_id']
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    pri_skill = request.form['pri_skill']
+   # first_name = request.form['first_name']
+  #  last_name = request.form['last_name']
+   # pri_skill = request.form['pri_skill']
+    emp_name = request.form['emp_name']
+    phone = request.form['emp_phone']
+    email = request.form['emp_email']
+    position = request.form['emp_posi']
+    department = request.form['emp_dept'] 
+    joindate = request.form['emp_date']
+    salary = request.form['emp_salary']
     location = request.form['location']
     emp_image_file = request.files['emp_image_file']
 
-    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s)"
+    insert_sql = "INSERT INTO employee VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"
     cursor = db_conn.cursor()
 
     if emp_image_file.filename == "":
         return "Please select a file"
 
     try:
-
-        cursor.execute(insert_sql, (emp_id, first_name, last_name, pri_skill, location))
+        val = (emp_id, emp_name, phone, email, position, department, joindate, salary)
+        cursor.execute(insert_sql, val)
         db_conn.commit()
-        emp_name = "" + first_name + " " + last_name
+        #emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
         emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
         s3 = boto3.resource('s3')
@@ -78,7 +85,7 @@ def AddEmp():
         cursor.close()
 
     print("all modification done...")
-    return render_template('AddEmpOutput.html', name=emp_name)
+    return render_template('AddStaffOutput.html', name=emp_name)
 
 
 if __name__ == '__main__':
