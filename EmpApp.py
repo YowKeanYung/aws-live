@@ -2,7 +2,6 @@ from flask import Flask, render_template, request, session
 from flask_session import Session
 from flask.wrappers import Response
 from pymysql import connections
-import os
 import boto3
 from config import *
 
