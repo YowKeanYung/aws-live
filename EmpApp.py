@@ -107,6 +107,8 @@ def searchstaffpage():
 def searchpay():
     return render_template('SearchPay.html')
 
+
+
 @app.route("/searchstaffdetails", methods=['POST'])
 def searchstaffdetails():
      emp_id = request.form['emp_id']
@@ -189,6 +191,40 @@ def getemp():
 
      return render_template('Allemp.html', value=result)
 
+@app.route("/getattendance", methods=['GET', 'POST'])
+def getattendance():
+    # emp_id = request.form['emp_id']
+   
+     selectsql = "SELECT * FROM attendance"
+     cursor = db_conn.cursor()
+     #adr = (emp_id)
+
+     
+     cursor.execute(selectsql) 
+
+        
+     result = cursor.fetchall()
+     session["result"]=result
+     
+     return render_template('Attendance.html', value=result)
+
+@app.route("/getattendanceoutput", methods=['GET', 'POST'])
+def getattendanceoutput():
+    # emp_id = request.form['emp_id']
+   
+     selectsql = "SELECT * FROM attendance"
+     cursor = db_conn.cursor()
+     #adr = (emp_id)
+
+     
+     cursor.execute(selectsql) 
+
+        
+     result = cursor.fetchall()
+     session["result"]=result
+     
+     return render_template('AttendanceOutput.html', value=result)
+
 @app.route("/payroll", methods=['POST'])
 def payroll():
      emp_id = request.form['emp_id']
@@ -237,6 +273,12 @@ def updatesalary():
      db_conn.commit()
      cursor.close()
      return render_template('PayrollOutput.html', salary=salaryy, id=session.get("adr"), name=session.get("name"))
+
+
+@app.route("/saveattendance", methods=['GET', 'POST'])
+def saveattendance():
+    return render_template('AttendanceOutput.html')
+
 
 
 

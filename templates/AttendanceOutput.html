@@ -1,17 +1,17 @@
 <!doctype html>
 <html>
 <head>
-<title>Attendance Output</title>
-<!----------------------external link--------------------->
-    <link rel="stylesheet" type="text/css" href="IvFN.css"/>
+	<title>Attendance Output</title>
+	<!----------------------external link--------------------->
+	<link rel="stylesheet" type="text/css" href="/static/IvFN.css" />
 	<style>
 		form {
 			text-align: center;
 		}
-		
-		#sea a{
+
+		#sea a {
 			text-decoration: none;
-			color:#EDDCDC;
+			color: #EDDCDC;
 		}
 	</style>
 </head>
@@ -19,26 +19,52 @@
 <body>
 <center>
 <div id="IvFN">
-    <div id="IvFNH1" class="IvFNH1">
-		<a href="HomePage.html"><img src="IMG/logo.png" class="logo" alt="logo"></a>
-        <h1 class="IvFNH1">Saved Successfully</h1>
-		<br/>
+	<div id="IvFNH1" class="IvFNH1">
+		<a href="/"><img src="{{url_for('static', filename='/IMG/logo.png')}}" class="logo" alt="logo"></a>
+		<h1 class="IvFNH1">Saved Successfully</h1>
+		<br />
 	</div>
 	<div id="IvFNHead" class="IvFNHead">
 		<ul class="menu">
-			<li><a href="HomePage.html" class="current">Home</a></li>
-			<li><a href="AddStaff.html">Add Staff</a></li>
-			<li><a href="SearchStaff.html">Search Staff</a></li>
-			<li><a href="Payroll.html">Payroll</a></li>
-			<li><a href="Attendance.html">Attendance</a></li>
+			<li><a href="/" class="current">Home</a></li>
+			<li><a href="/staffpage">Add Staff</a></li>
+			<li><a href="/searchstaffpage">Search Staff</a></li>
+			<li><a href="/searchpay">Payroll</a></li>
+			<li><a href="/getattendance">Attendance</a></li>
 		</ul>
 	</div>
 <!-------------------------content------------------------>
     <div id="IvFNP">
 			<h2>All Employee attendance has been added to the database</h2><br>
-				<form action="http://3.134.115.108:80/" autocomplete="on" method = "GET">
+		<table border="1"> 
+			<thead> 
+				<tr>
+					<th>Emp ID</th>
+					<th>Name</th>
+					<th>Position</th>
+					<th>Department</th>
+					<th>Attendance</th>
+					<th>Date</th>
+				</tr> 
+			</thead> 
+			<tbody> 
+			{% for row in value %}  
+				<tr>
+					<td>{{row[0]}}</td>
+					<td>{{row[1]}}</td>
+					<td>{{row[2]}}</td>
+					<td>{{row[3]}}</td>
+					<td>{{row[4]}}</td>
+					<td>{{row[5]}}</td>
+
+				</tr> 
+			{% endfor %} 
+			</tbody> 
+		</table>	
+		<br />
+		<form action="/getattendanceoutput" autocomplete="on" method = "GET">
 					<div id="sea">
-					<button type="submit" style="background: #391627; height: 45px; width: 200px; color: #EDDCDC; size: 5; font:oblique;"><a href="HomePage.html">GO BACK</a></button><br><br>
+					<button type="submit" style="background: #391627; height: 30px; width: 100px; color: #EDDCDC; size: 5; font: oblique;"formaction="/">GO BACK</button><br><br>
 					</div>
 				</form>
     </div>
