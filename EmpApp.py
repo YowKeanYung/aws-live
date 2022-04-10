@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
+from flask_session import Session
 from flask.wrappers import Response
 from pymysql import connections
 import os
@@ -6,7 +7,9 @@ import boto3
 from config import *
 
 app = Flask(__name__)
-
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 bucket = custombucket
 region = customregion
 
@@ -61,7 +64,7 @@ def AddEmp():
         db_conn.commit()
         #emp_name = "" + first_name + " " + last_name
         # Uplaod image file in S3 #
-        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+        emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file.jpg"
         s3 = boto3.resource('s3')
 
         try:
@@ -88,7 +91,7 @@ def AddEmp():
 
     print("all modification done...")
 
-    return render_template('AddStaffOutput.html', name=emp_name)
+    return render_template('AddStaffOutput.html', name=emp_name, id=emp_id)
 
 
 
@@ -99,6 +102,10 @@ def staffpage():
 @app.route("/searchstaffpage", methods=['GET', 'POST'])
 def searchstaffpage():
     return render_template('SearchStaff.html')
+
+@app.route("/searchpay", methods=['GET', 'POST'])
+def searchpay():
+    return render_template('SearchPay.html')
 
 @app.route("/searchstaffdetails", methods=['POST'])
 def searchstaffdetails():
@@ -123,16 +130,31 @@ def searchstaffdetails():
       joindate = myresult[6]
       salary = myresult[7]
 
-      emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+      emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file.jpg"
+      s3 = boto3.resource('s3')
+    # # obj = s3.Object(Bucket=custombucket, Key=emp_image_file_name_in_s3)
       s3_client = boto3.client('s3')
-      response = s3_client.get_object(Bucket=custombucket, Key=emp_image_file_name_in_s3)
-      data = response['Body'].read()
+    # ## response = s3_client.get_object(Bucket=custombucket, Key=emp_image_file_name_in_s3)
+    # ## data = response['Body'].read().decode('utf-8')
+    #  response = s3.Bucket(custombucket).download_file(Key=emp_image_file_name_in_s3, 'my_localimage.jpg')
+    ##  datas=obj.get()['Body'].read().decode('utf-8')
+      #url = s3_client.generate_presigned_url('get_object',
+      #                          Params={
+      #                              'Bucket': 'custombucket',
+      #                              'Key': 'emp_image_file_name_in_s3',
+      #                          },                                  
+      #                          ExpiresIn=3600)
+      #print (url)
+     
 
+      object_url = "https://yowkeanyung-employee.s3.amazonaws.com/{1}".format(
+      custombucket,
+      emp_image_file_name_in_s3)
      finally:
       cursor.close()
 
      return render_template('ViewStaff.html', id=emp_id, name=emp_name,
-                           phone=phone, email=email, position=position, department=department, joinDate=joindate, salary=salary, image_url=data)
+                           phone=phone, email=email, position=position, department=department, joinDate=joindate, salary=salary, image_url=object_url)
     
 
 
@@ -166,6 +188,57 @@ def getemp():
      # p.append(d)
 
      return render_template('Allemp.html', value=result)
+
+@app.route("/payroll", methods=['POST'])
+def payroll():
+     emp_id = request.form['emp_id']
+   
+     selectsql = "SELECT * FROM employee WHERE emp_id = %s"
+     cursor = db_conn.cursor()
+     adr = (emp_id)
+     session["adr"]=adr
+     try:
+      cursor.execute(selectsql, adr) 
+
+        # if SELECT:
+      myresult = cursor.fetchone()
+
+      emp_id = myresult[0]
+      emp_name = myresult[1]
+      position = myresult[4]
+      department = myresult[5] 
+      salary = myresult[7]
+
+      session["name"]=emp_name
+      
+      #emp_image_file_name_in_s3 = "emp-id-" + str(emp_id) + "_image_file"
+      #s3_client = boto3.client('s3')
+      #response = s3_client.get_object(Bucket=custombucket, Key=emp_image_file_name_in_s3)
+      #data = response['Body'].read()
+
+     finally:
+      cursor.close()
+
+     return render_template('Payroll.html', idd=emp_id, name=emp_name,
+                           position=position, department=department, salary=salary)
+
+
+
+
+@app.route("/updatesalary", methods=['GET', 'POST'])
+def updatesalary():
+     
+     salaryy = request.form['emp_salary']
+     
+     update_sql = "UPDATE employee SET salary = %s WHERE emp_id = %s"
+     val = (salaryy, session.get("adr"))
+     cursor = db_conn.cursor()
+     cursor.execute(update_sql, val)
+     db_conn.commit()
+     cursor.close()
+     return render_template('PayrollOutput.html', salary=salaryy, id=session.get("adr"), name=session.get("name"))
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80, debug=True)

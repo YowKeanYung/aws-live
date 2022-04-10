@@ -32,38 +32,36 @@
 			<li><a href="/" class="current">Home</a></li>
 			<li><a href="/staffpage">Add Staff</a></li>
 			<li><a href="/searchstaffpage">Search Staff</a></li>
-			<li><a href="Payroll.html">Payroll</a></li>
+			<li><a href="/searchpay">Payroll</a></li>
 			<li><a href="Attendance.html">Attendance</a></li>
-			<li><a href="Benefits.html">Benefits</a></li>
 		</ul>
 	</div>
 <!-------------------------content------------------------>
     <div id="IvFNP">
-		<form action="/addstaff" autocomplete="on" method = "POST" enctype="multipart/form-data">
+		<form action="/addstaff" autocomplete="on" method="POST" enctype="multipart/form-data">
 
-				<button type="submit" formaction="/getemp" style="background: grey; height: 45px; width: 200px; color:white; font:oblique;">GET EMPLOYEE INFO</button><br><br>
+			<button type="submit" formaction="/getemp" style="background: #391627; height: 45px; width: 200px; color:#EDDCDC; font:oblique;">GET EMPLOYEE INFO</button><br><br>
+			Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id" autofocus size="40"><br><br>
 
-		  		Employee ID:<br> <input style="height:25px;font-size:14pt; color:grey;" type="number" name="emp_id" autofocus size="40"><br><br>
+			Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_name"><br><br>
 
-		  		Name:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_name" ><br><br>
+			Phone No.:<br> <input style="height:25px;font-size:14pt;color:grey;" type="number" name="emp_phone"><br><br>
 
-		  		Phone No.:<br> <input style="height:25px;font-size:14pt;color:grey;" type="number" name="emp_phone"><br><br>
+			Email:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_email"><br><br>
 
-		  		Email:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_email"><br><br>
+			Position:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_posi"><br><br>
 
-		  		Position:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_posi"><br><br>
+			Department:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_dept"><br><br>
 
-				Department:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_dept"><br><br>
-				
-				Joined Date:<br> <input style="height:25px;font-size:14pt;color:grey;" type="datetime" name="emp_date"><br><br>
-				
-				Salary:<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_salary"><br><br>
+			Joined Date:<br> <input style="height:25px;font-size:14pt;color:grey;" type="datetime" name="emp_date"><br><br>
 
-		  		Image: <input type=file name="emp_image_file" style="height:25px;font-size:14pt;color:grey;"> <br><br>
+			Salary (RM):<br> <input style="height:25px;font-size:14pt;color:grey;" type="text" name="emp_salary"><br><br>
 
-		  		<button type="submit" style="background: grey; height: 45px; width: 200px; color: white; size: 5; font:oblique;">SAVE</button>
+			Image: <input type=file name="emp_image_file" style="height:25px;font-size:14pt;color:grey;"> <br><br>
 
-			</form>
+			<button type="submit" style="background: #391627; height: 45px; width: 200px; color: #EDDCDC; size: 5; font: oblique; ">SAVE</button>
+
+		</form>
     </div>
 	<br/>
 </div>

@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+	<title>Payroll Output</title>
+	<!----------------------external link--------------------->
+	<link rel="stylesheet" type="text/css" href="/static/IvFN.css" />
+	<style>
+		form {
+			text-align: center;
+		}
+
+		#sea a {
+			text-decoration: none;
+			color: #EDDCDC;
+		}
+	</style>
+</head>
+<!----------------------header--------------------->
+<body>
+<center>
+<div id="IvFN">
+	<div id="IvFNH1" class="IvFNH1">
+		<a href="/"><img src="{{url_for('static', filename='/IMG/logo.png')}}" class="logo" alt="logo"></a>
+		<h1 class="IvFNH1">Saved Successfully</h1>
+		<br />
+	</div>
+	<div id="IvFNHead" class="IvFNHead">
+		<ul class="menu">
+			<li><a href="/" class="current">Home</a></li>
+			<li><a href="/staffpage">Add Staff</a></li>
+			<li><a href="/searchstaffpage">Search Staff</a></li>
+			<li><a href="/searchpay">Payroll</a></li>
+			<li><a href="Attendance.html">Attendance</a></li>
+		</ul>
+	</div>
+<!-------------------------content------------------------>
+	<div id="IvFNP">
+		<h2>Following Employee Salary has been updated to the database</h2><br>
+		<h2>Employee ID: {{ id }} <br /> Name: {{ name }} <br /> Salary (RM): {{ salary }}  </h2><br>
+		<form autocomplete="on" method="post">
+			<div id="sea">
+				<button type="submit" style="background: #391627; height: 45px; width: 200px; color: #EDDCDC; size: 5; font:oblique;"formaction="/searchpay">GO BACK</button><br><br>
+			</div>
+		</form>
+	</div>
+    </div>
+	<br/>
+
+</center>
+</body>
+</html>

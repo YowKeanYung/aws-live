@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+	<title>Search Pay</title>
+	<!----------------------external link--------------------->
+	<link rel="stylesheet" type="text/css" href="/static/IvFN.css" />
+	<style>
+		form {
+			text-align: center;
+		}
+
+		#sea a {
+			text-decoration: none;
+			color: #EDDCDC;
+		}
+	</style>
+</head>
+<!----------------------header--------------------->
+<body>
+<center>
+<div id="IvFN">
+	<div id="IvFNH1" class="IvFNH1">
+		<a href="/"><img src="{{url_for('static', filename='/IMG/logo.png')}}" class="logo" alt="logo"></a>
+		<h1 class="IvFNH1">Search Staff (Edit Payroll)</h1>
+		<br />
+	</div>
+	<div id="IvFNHead" class="IvFNHead">
+		<ul class="menu">
+			<li><a href="/" class="current">Home</a></li>
+			<li><a href="/staffpage">Add Staff</a></li>
+			<li><a href="/searchstaffpage">Search Staff</a></li>
+			<li><a href="/searchpay">Payroll</a></li>
+			<li><a href="Attendance.html">Attendance</a></li>
+		</ul>
+	</div>
+<!-------------------------content------------------------>
+    <div id="IvFNP">
+		<form action="/payroll" autocomplete="on" method="POST">
+
+			<h3>Please Enter Employee ID to Edit Payroll</h3>
+
+		  	Employee ID:<br> <input style="height:25px;font-size:14pt;" type="number" name="emp_id" autofocus size="40"><br><br>
+
+
+	  		<!--<button type="submit" formaction="http://3.134.115.108:80/" style="background: #EDDCDC	; height: 45px; width: 200px; color: #391627; size: 5; font:oblique;" method="GET">GO TO UPDATE DATABASE PAGE</button><br/><br/>-->
+			
+			<div id="sea">
+			
+			<button type="submit" style="background: #391627; height: 45px; width: 200px; color: #EDDCDC; size: 5; font:oblique;">EDIT PAYROLL</button><br><br>
+			</div>
+		</form>
+    </div>
+	<br/>
+</div>
+</center>
+</body>
+</html>

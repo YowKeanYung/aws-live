@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+<head>
+<title>Attendance</title>
+<!----------------------external link--------------------->
+    <link rel="stylesheet" type="text/css" href="IvFN.css"/>
+	<style>
+		form {
+			text-align: center;
+		}
+	</style>
+</head>
+<!----------------------header--------------------->
+<body>
+<center>
+<div id="IvFN">
+    <div id="IvFNH1" class="IvFNH1">
+		<a href="HomePage.html"><img src="IMG/logo.png" class="logo" alt="logo"></a>
+        <h1 class="IvFNH1">Attendance</h1>
+		<br/>
+	</div>
+	<div id="IvFNHead" class="IvFNHead">
+		<ul class="menu">
+			<li><a href="HomePage.html" class="current">Home</a></li>
+			<li><a href="AddStaff.html">Add Staff</a></li>
+			<li><a href="SearchStaff.html">Search Staff</a></li>
+			<li><a href="Payroll.html">Payroll</a></li>
+			<li><a href="Attendance.html">Attendance</a></li>
+		</ul>
+	</div>
+<!-------------------------content------------------------>
+    <div id="IvFNP">
+	<table>
+		<tr>
+			<td>
+				<h3>Date: </h3>
+			</td>
+			<td>
+				<p id="date"></p>
+			</td>
+		</tr>
+	</table>
+						<form>
+		<table border="1"> 
+			<thead> 
+			<tr> 
+				<th>Emp ID</th> 
+				<th>Name</th>
+				<th>Position</th>
+				<th>Department</th>
+				<th>Attendance</th>
+			</tr> 
+			</thead> 
+			<tbody> 
+			{% for row in value %}  
+				<tr> 
+					<td>{{row[0]}}</td> 
+					<td>{{row[1]}}</td>
+					<td>{{row[2]}}</td>
+					<td>{{row[3]}}</td>
+					<td>
+						<select name="Att">
+							<option value="Present">Present</option>
+							<option value="Absent">Absent</option>
+						</select>
+					</td>
+				</tr> 
+			{% endfor %} 
+			</tbody> 
+		</table> 
+	<button type="submit" style="background: #391627; height: 30px; width: 100px; color: #EDDCDC; size: 5; font:oblique;">SAVE</button>
+	</form>
+	<script>
+		n =  new Date();
+		y = n.getFullYear();
+		m = n.getMonth() + 1;
+		d = n.getDate();
+		document.getElementById("date").innerHTML = d + "/" + m + "/" + y;
+	</script>
+		
+    </div>
+	<br/>
+</div>
+</center>
+</body>
+</html>
